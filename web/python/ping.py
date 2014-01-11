@@ -1,20 +1,10 @@
 import subprocess
 import numpy as np
 
-machines = ['felafel',
-          'few',
-          'fence',
-          'feckless',
-          'fetlock',
-          'feudal',
-          'fez',
-          'felicity',
-          'feature',
-          'fever']
+# Load list of machines
 
-# machines = ['felafel',
-#             'few',
-#             'fence']
+with open('../data/machines.csv', 'r') as f:
+    machines = [line.strip() for line in f]
 
 # Ping the cluster
 
@@ -25,6 +15,7 @@ for (i, machine) in enumerate(machines):
     ping_response = subprocess.Popen(["/bin/ping", "-c5", machine], stdout=subprocess.PIPE).stdout.read().split('\n')
     if ping_response[-2][:3] == 'rtt':
         print 'Success :D'
+        # Extract the average ping
         pings[i] = float(ping_response[-2].split('/')[4])
     else:
         print 'Failure D:'
@@ -56,8 +47,8 @@ for (machine, is_dead, ping) in zip(sorted_machines, dead, sorted_pings):
 dead_list = dead_list[:-1]
 ping_list = ping_list[:-1]
 
-with open('ping.csv', 'w') as f:
+with open('../data/ping.csv', 'w') as f:
     f.write(ping_list)
 
-with open('dead.csv', 'w') as f:
+with open('../data/dead-ping.csv', 'w') as f:
     f.write(dead_list)

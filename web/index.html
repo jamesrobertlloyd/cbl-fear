@@ -10,61 +10,35 @@
 	<script type="text/javascript" src="js/jquery.csvToTable.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="js/jquery.csv-0.71.js "></script>
-
-	<script>
-	google.load("visualization", "1", {packages:["corechart"]});
-	google.setOnLoadCallback(drawChart);
-
-	// this has to be a global function
-	function drawChart() {
-	   // grab the CSV
-	   $.get("ping.csv", function(csvString) {
-	      // transform the CSV string into a 2-dimensional array
-	      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-
-	      // this new DataTable object holds all the data
-	      var data = new google.visualization.arrayToDataTable(arrayData);
-
-	      // this view can select a subset of the data at a time
-	      var view = new google.visualization.DataView(data);
-	      view.setColumns([0,1]);
-
-	     // set chart options
-	     var options = {
-	        title: "Ping!",
-	        hAxis: {title: data.getColumnLabel(1), minValue: 0, maxValue: data.getColumnRange(1).max},
-	        vAxis: {title: data.getColumnLabel(0)},
-	        legend: 'none'
-	     };
-
-	     // create the chart object and draw it
-	     var chart = new google.visualization.BarChart(document.getElementById('chart'));
-	     chart.draw(view, options);
-	  });
-	}
-	</script>
-	
-	<script>
-	$(function() {
-		$('#CSVTableDead').CSVToTable('dead.csv', { loadingImage: 'images/kitten-100-100.jpg', startLine: 0 });
-		$('#CSVTablePing').CSVToTable('ping.csv', { loadingImage: 'images/kitten-100-100.jpg', startLine: 0 });
-	});
-	</script>
+	<script type="text/javascript" src="js/tables-and-charts.js "></script>
 </head>
 <body>
 
-<h2>The following machines are not responding to hails</h2>
+<h2>The following machines are not responding to pings</h2>
 <br>
-<div id="CSVTableDead"></div>
+<div id="CSVTableDeadPing"></div>
 <br>
 
-<h2>Average pings to alive machines</h2>
+<h2>Average pings</h2>
 <br>
 <div id="CSVTablePing"></div>
 <br>
 
 <h2>A chart with those pings</h2>
-<div id="chart" style="width: 900px; height: 500px;"></div>
+<div id="chart-ping" style="width: 900px; height: 500px;"></div>
+
+<h2>The following machines are not responding to ssh</h2>
+<br>
+<div id="CSVTableDeadSsh"></div>
+<br>
+
+<h2>CPU usage</h2>
+<br>
+<div id="CSVTableCPU"></div>
+<br>
+
+<h2>A chart with CPU usage</h2>
+<div id="chart-cpu" style="width: 900px; height: 500px;"></div>
 
 </body>
 </html>
