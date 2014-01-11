@@ -10,4 +10,4 @@ f = open('../images/kitten-%d-%d.jpeg' % (height, width), 'w')
 f.write(kitten)
 f.close()
 
-print 'Kittehs acquired'
+print 'Kittens acquired'

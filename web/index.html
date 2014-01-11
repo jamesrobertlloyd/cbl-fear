@@ -14,31 +14,31 @@
 </head>
 <body>
 
-<h2>The following machines are not responding to pings</h2>
+<h2>The following users may have jobs on unresponsive machines</h2>
 <br>
-<div id="CSVTableDeadPing"></div>
-<br>
-
-<h2>Average pings</h2>
-<br>
-<div id="CSVTablePing"></div>
+<div id="CSVTableDeadUsers"></div>
+<p>If you are in this list, consider running <code>qdel -f -u [username]</code> on fear to clear the jobs on unresponsive machines</p>
+<p>Be warned, this deletes all of your jobs</p>
 <br>
 
-<h2>A chart with those pings</h2>
-<div id="chart-ping" style="width: 900px; height: 500px;"></div>
+<h2>Benchmark times</h2>
+<div id="chart-bench" style="width: 900px; height: 500px;"></div>
 
 <h2>The following machines are not responding to ssh</h2>
 <br>
 <div id="CSVTableDeadSsh"></div>
 <br>
 
-<h2>CPU usage</h2>
+<h2>The following machines are not responding to pings</h2>
 <br>
-<div id="CSVTableCPU"></div>
+<div id="CSVTableDeadPing"></div>
 <br>
 
-<h2>A chart with CPU usage</h2>
+<h2>CPU usage</h2>
 <div id="chart-cpu" style="width: 900px; height: 500px;"></div>
+
+<h2>Pings</h2>
+<div id="chart-ping" style="width: 900px; height: 500px;"></div>
 
 </body>
 </html>
