@@ -56,12 +56,8 @@ function drawChart() {
 
       // this new DataTable object holds all the data
       var data = new google.visualization.arrayToDataTable(arrayData);
-      /*data.SetColumnProperty(2, 'role', 'tooltip')*/
 
       // this view can select a subset of the data at a time
-      /*var view = new google.visualization.DataView(data);
-      view.setColumns([0,1]);
-      view.setColumns([0,1,2,{calc:function (dataTable, rowNum){return dataTable.getValue(rowNum, 2)}, type:'string', role:'tooltip'}]);*/
       var view = new google.visualization.DataView(data);
       /*view.setColumns([0,1]);*/
       view.setColumns([{calc:function (dataTable, rowNum){return new Date(dataTable.getValue(rowNum, 0))}, label:'Date', type:'datetime', role:'domain'},
@@ -78,6 +74,29 @@ function drawChart() {
 
      // create the chart object and draw it
      var chart = new google.visualization.LineChart(document.getElementById('chart-bench'));
+     chart.draw(view, options);
+  });
+   $.get("data/bench-zip.csv", function(csvString) {
+      // transform the CSV string into a 2-dimensional array
+      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+
+      // this new DataTable object holds all the data
+      var data = new google.visualization.arrayToDataTable(arrayData);
+
+      // this view can select a subset of the data at a time
+      var view = new google.visualization.DataView(data);
+      view.setColumns([{calc:function (dataTable, rowNum){return new Date(dataTable.getValue(rowNum, 0))}, label:'Date', type:'datetime', role:'domain'},1]);
+
+     // set chart options
+     var options = {
+        title: "Time taken to send, unzip and remove 50 small files",
+        hAxis: {title: 'Date'},
+        vAxis: {title: 'Benchmark time'},
+        legend: 'none'
+     };
+
+     // create the chart object and draw it
+     var chart = new google.visualization.LineChart(document.getElementById('chart-bench-zip'));
      chart.draw(view, options);
   });
 }
