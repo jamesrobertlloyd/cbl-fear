@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>Fear</title>
+    <meta charset="utf-8" />
+    <title>Fear</title>
 
-	<link rel="stylesheet" href="css/csvtable.css" type="text/css" />
+    <link rel="stylesheet" href="css/csvtable.css" type="text/css" />
 
-	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.csvToTable.js"></script>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="js/jquery.csv-0.71.js "></script>
-	<script type="text/javascript" src="js/tables-and-charts.js "></script>
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.csvToTable.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="js/jquery.csv-0.71.js "></script>
+    <script type="text/javascript" src="js/tables-and-charts.js "></script>
+    <script type="text/javascript" src="js/update-text.js "></script>
 </head>
 <body>
 
-<h2>The following users may have jobs on unresponsive machines</h2>
+<p>Last updated <span id="time"></span></p>
+
+<h2>How healthy is fear?</h2>
+<p>This simple website reports the health of the computing cluster in a small number of ways</p>
+<p>Source code is <a href="http://github.com/jamesrobertlloyd/cbl-fear">here</a></p>
+<h4>Other things this website could do</h4>
+<ul>
+    <li>Report memory usage on each machine</li>
+    <li>Detect processes using too much memory</li>
+    <li>Detect processes using too many cores</li>
+    <li>Probably other things...</li>
+</ul>
+
+<h2>The following users may have lost jobs on unresponsive machines</h2>
 <br>
 <div id="CSVTableDeadUsers"></div>
-<p>If you are in this list, consider running <code>qdel -f -u [username]</code> on fear to clear the jobs on unresponsive machines</p>
+<p>If you are in this list, consider running <code>qdel -f -u [username]</code> on fear to clear the jobs on unresponsive machines from qstat output</p>
 <p>Be warned, this deletes all of your jobs</p>
-<br>
 
 <h2>Benchmark times</h2>
 <div id="chart-bench" style="width: 900px; height: 500px;"></div>

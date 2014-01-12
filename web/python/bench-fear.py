@@ -27,10 +27,20 @@ while True:
 
 	the_time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
+	# Open results
+
+	with open('../data/bench.csv', 'r') as f:
+		benchmarks = f.readlines()
+
+	if len(benchmarks) > 500:
+		benchmarks = benchmarks[0] + benchmarks[-499:]
+
 	# Append to results
 
-	with open('../data/bench.csv', 'a') as f:
-		f.write('\n%s,%f,%s' % (the_time, t, name))
+	benchmarks.append('%s,%f,%s\n' % (the_time, t, name))
+
+	with open('../data/bench.csv', 'w') as f:
+		f.writelines(benchmarks)
 
 	print 'Nap time'
 	time.sleep(30 * 60)

@@ -63,11 +63,14 @@ function drawChart() {
       view.setColumns([0,1]);
       view.setColumns([0,1,2,{calc:function (dataTable, rowNum){return dataTable.getValue(rowNum, 2)}, type:'string', role:'tooltip'}]);*/
       var view = new google.visualization.DataView(data);
-      view.setColumns([0,1]);
+      /*view.setColumns([0,1]);*/
+      view.setColumns([{calc:function (dataTable, rowNum){return new Date(dataTable.getValue(rowNum, 0))}, label:'Date', type:'datetime', role:'domain'},
+                       1,
+                       {calc:function (dataTable, rowNum){return dataTable.getValue(rowNum, 2)}, type:'string', role:'tooltip'}]);
 
      // set chart options
      var options = {
-        title: "Time taken to complete a benchmark",
+        title: "Time taken to complete a benchmark (s)",
         hAxis: {title: 'Date'},
         vAxis: {title: 'Benchmark time'},
         legend: 'none'
