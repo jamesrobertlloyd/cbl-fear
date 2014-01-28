@@ -37,7 +37,7 @@ while True:
         benchmarks = f.readlines()
 
     if len(benchmarks) > 500:
-        benchmarks = benchmarks[0] + benchmarks[-499:]
+        benchmarks = [benchmarks[0]] + benchmarks[-499:]
 
     # Append to results
 
@@ -86,7 +86,7 @@ while True:
         benchmarks = f.readlines()
 
     if len(benchmarks) > 500:
-        benchmarks = benchmarks[0] + benchmarks[-499:]
+        benchmarks = [benchmarks[0]] + benchmarks[-499:]
 
     # Append to results
 
