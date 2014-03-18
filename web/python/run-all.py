@@ -1,35 +1,44 @@
 import subprocess
 import os
 import time
+import sys
 
 # Runs all fear related scripts
 
 while True:
 
-    print '\n* * * * *\nAcquiring kittens\n* * * * *\n'
+    try:
 
-    #saved_path = os.getcwd()
-    #os.chdir('../feature-generation/')
-    subprocess.call(['python', 'kittens.py'])
-    #os.chdir(saved_path)
+        print '\n* * * * *\nAcquiring kittens\n* * * * *\n'
 
-    print '\n* * * * *\nPinging cluster\n* * * * *\n'
+        #saved_path = os.getcwd()
+        #os.chdir('../feature-generation/')
+        subprocess.call(['python', 'kittens.py'])
+        #os.chdir(saved_path)
 
-    subprocess.call(['python', 'ping.py'])
+        print '\n* * * * *\nPinging cluster\n* * * * *\n'
 
-    print '\n* * * * *\nQuerying CPU usage\n* * * * *\n'
+        subprocess.call(['python', 'ping.py'])
 
-    subprocess.call(['python', 'cpu.py'])
+        print '\n* * * * *\nQuerying CPU usage\n* * * * *\n'
 
-    print '\n* * * * *\nCheck for stranded jobs\n* * * * *\n'
+        subprocess.call(['python', 'cpu.py'])
 
-    subprocess.call(['python', 'dead-jobs.py'])
+        print '\n* * * * *\nCheck for stranded jobs\n* * * * *\n'
 
-    print '\n* * * * *\nRecording update time\n* * * * *\n'
+        subprocess.call(['python', 'dead-jobs.py'])
 
-    the_time = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
-    with open('../data/time.csv', 'w') as f:
-        f.write(the_time)
+        print '\n* * * * *\nRecording update time\n* * * * *\n'
 
-    print 'Nap time!'
-    time.sleep(5*60)
+        the_time = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+        with open('../data/time.csv', 'w') as f:
+            f.write(the_time)
+
+        print 'Nap time!'
+        time.sleep(5*60)
+
+    except:
+
+        print 'Oh no, I died!'
+        print sys.exc_info()[0]
+        time.sleep(30*60)
